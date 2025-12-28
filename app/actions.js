@@ -112,19 +112,12 @@ export async function deleteProduct(productId) {
 }
 
 export async function getPriceHistory(productId) {
-    try{
-        const supabase = await createServer();
-        const {data, error} = await supabase
-            .from("price_history")
-            .select("*")
-            .eq("product_id", productId)
-            .order("created_at", { ascending: true });
-            
-        if (error) throw error;
+  const supabase = await createServer();
+  const { data, error } = await supabase
+    .from("price_history")
+    .select("*")
+    .eq("product_id", productId)
+    .order("checked_at", { ascending: true });
 
-        return data || [];    
-    } catch (error) {
-        console.error("Get price history error:", error);
-        return [];
-    }
+  return data || [];
 }

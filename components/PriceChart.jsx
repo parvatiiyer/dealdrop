@@ -22,7 +22,7 @@ export default function PriceChart({ productId }) {
             const history = await getPriceHistory(productId);
 
             const chartData = history.map((item) => ({
-                date: new Date(item.checked_at).toLocaleDateString(),
+                date: new Date(item.checked_at ?? item.created_at).toLocaleDateString(),
                 price: parseFloat(item.price),
             }));
 
